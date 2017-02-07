@@ -8,7 +8,7 @@
 function returnFirstArgument(a) {
     return a;
 }
-returnFirstArgument(5);
+console.log( returnFirstArgument(5) );
 
 /*
  Задание 2:
@@ -19,7 +19,7 @@ returnFirstArgument(5);
 function defaultParameterValue(a, b = 100) {
     return a + b;
 }
-defaultParameterValue(8);
+console.log( defaultParameterValue(8) );
 
 /*
  Задание 3:
@@ -34,7 +34,7 @@ function returnArgumentsArray() {
     }
     return result;
 }
-returnArgumentsArray('one', 'two');
+console.log( returnArgumentsArray('one', 'two') );
 
 /*
  Задание 4:
@@ -55,9 +55,16 @@ console.log(returnFnResult());
  Функция должна принимать число (значение по умолчанию - 0) и возвращать функцию (F)
  При вызове F, переданное число должно быть увеличено на единицу и возвращено из F
  */
-function returnCounter(number) {
-
+function returnCounter(number = 0) {
+    return function f () {
+        number++;
+        return number;
+    };
 }
+var result = returnCounter();
+console.log(result());
+console.log(result());
+console.log(result());
 
 /*
  Задание 6 *:
@@ -65,9 +72,21 @@ function returnCounter(number) {
  Функция должна принимать другую функцию (F) и некоторое количество дополнительных аргументов
  Функция должна привязать переданные аргументы к функции F и вернуть получившуюся функцию
  */
-function bindFunction(fn) {
+function func () {
+    var result = 0;
+    for (var i = 0; i < arguments.length; i++) {
+        result += arguments[i];
+    }
+    return result;
+};
 
-}
+function bindFunction(fn) {
+    var bfunc = fn.bind(null, 20, 30);
+    return bfunc();
+};
+var resultBind = bindFunction(func);
+console.log(resultBind);
+
 
 export {
     returnFirstArgument,
